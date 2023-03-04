@@ -18,9 +18,8 @@
 4. Extrude walls for all rings and separate them from floor object
 5. Thicken all the walls by adding Solidify component
 6. Cut appropriate number of vertices for the first cylinder wall (starting from 45° to 135°)
-—————————————————————————————————
 _Until 6th point, the process will be the same for all maze type._
-—————————————————————————————————
+
 7. For ball to pass between circular paths, appropriate number of vertices will be cut. The length of cut will have size of X that is constant in all parts of the maze. Count of cuts for ball pass will increase for greater ring walls. 
 8. Initially, the escape path should be determined before other cuts are made. To do that, each ring wall is cut from a single place. 
 9. Then, to prevent to get inside the escape path, the circular path should be blocked with flat walls. There should be single way to go through the escape path. Those flat walls prevent to go along the circular path. They face exactly perpendicular to the center of the maze.  
