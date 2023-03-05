@@ -16,15 +16,14 @@ def CreateCylinder(r):
     me = obj.data
     bm = bmesh.from_edit_mesh(me)
     bm.faces.ensure_lookup_table()
-    for f in bm.faces:
-        if f.normal.z > 0.9:  # adjust threshold as needed
-            f.select = True
+    for face in bm.faces:
+        if face.normal.z > 0.9:  # adjust threshold as needed
+            face.select = True
             break
-        
+    
+    # inset face to upper-face twice
+    bmesh.ops.inset_region(bm, faces=[face], thickness = r)
+    bmesh.ops.inset_region(bm, faces=[face], thickness = 0.5)
     bmesh.update_edit_mesh(me)
     
-    # Exit edit mode
-    # bpy.ops.object.mode_set(mode='OBJECT')
-    
-
 CreateCylinder(6)
