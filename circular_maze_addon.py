@@ -12,24 +12,19 @@ def CreateCylinder(r):
 
     bpy.ops.object.mode_set(mode='EDIT')
     bpy.ops.mesh.select_all(action='DESELECT')
-    
-    # Select the first face
-    bm = bmesh.from_edit_mesh(obj.data)
+
+    me = obj.data
+    bm = bmesh.from_edit_mesh(me)
     bm.faces.ensure_lookup_table()
-    bm.faces[0].select_set(True)
-    
-    mat = bpy.data.materials.new(name="Material")
-    mat.diffuse_color = (0, 0, 1, 1) # Blue color
-    obj.data.materials.append(mat)
-    
-    # Assign the new material to the selected face(s)
-    bpy.ops.object.material_slot_assign()
-    
-    # Show the updates in the viewport
-    bmesh.update_edit_mesh(bpy.context.object.data)
+    for f in bm.faces:
+        if f.normal.z > 0.9:  # adjust threshold as needed
+            f.select = True
+            break
+        
+    bmesh.update_edit_mesh(me)
     
     # Exit edit mode
-    bpy.ops.object.mode_set(mode='OBJECT')
+    # bpy.ops.object.mode_set(mode='OBJECT')
     
 
 CreateCylinder(6)
